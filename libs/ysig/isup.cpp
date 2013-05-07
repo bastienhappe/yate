@@ -2460,7 +2460,7 @@ SignallingEvent* SS7ISUPCall::getEvent(const Time& when)
 		    }
 		    break;
 		case SS7MsgISUP::REL:
-if (isup()->m_testScenario != "NO_RLC") { /* Q.784.1 5.2.3 */ break;}
+if (isup()->m_testScenario == "NO_RLC") { /* Q.784.1 5.2.3 */ break;}
 		    if (m_state < Releasing) {
 		        m_relTimer.stop();
 			m_lastEvent = releaseComplete(false,msg);
