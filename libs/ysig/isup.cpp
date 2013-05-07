@@ -2229,7 +2229,6 @@ static int transmitRLC(SS7ISUP* isup, unsigned int cic, const SS7Label& label, b
     }
     return isup->transmitMessage(m,label,recvLbl);
 }
-
 // Push down the protocol stack a CNF (Confusion) message
 static int transmitCNF(SS7ISUP* isup, unsigned int cic, const SS7Label& label, bool recvLbl,
     const char* reason, const char* diagnostic = 0, const char* location = 0)
@@ -2461,6 +2460,7 @@ SignallingEvent* SS7ISUPCall::getEvent(const Time& when)
 		    }
 		    break;
 		case SS7MsgISUP::REL:
+if (isup()->m_testScenario == "NO_RLC") { /* Q.784.1 5.2.3 */ break;}
 		    if (m_state < Releasing) {
 		        m_relTimer.stop();
 			m_lastEvent = releaseComplete(false,msg);
